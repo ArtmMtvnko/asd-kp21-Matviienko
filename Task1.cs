@@ -7,20 +7,39 @@ class Card
     {
         const int pi = 180;
 
-        double x = 2;
-        double y = 1;
-        double z = 3;
+        Console.WriteLine("Enter x: ");
+        double x = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Enter y: ");
+        double y = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Enter z: ");
+        double z = Convert.ToDouble(Console.ReadLine());
 
         double a = 0;
         double b = 0;
 
-        double angleTan = (Math.Pow(x, (-y)) + (z / (y * y + 1)) + Math.Round(Math.Pow(y / (x * z + 2), (0.333)), 1));
-        double radianTan = angleTan * (Math.PI / 180);
-        a = Math.Tan(radianTan);
+        if (x * z == -2)
+        {
+            Console.WriteLine("Error");
+        }
+        else
+        {
+            double angleTan = (Math.Pow(x, (-y)) + (z / (y * y + 1)) + Math.Round(Math.Pow(y / (x * z + 2), (0.333)), 1));
+            double radianTan = angleTan * (Math.PI / 180);
+            a = Math.Tan(radianTan);
+        }
 
         double angleSin = (x + pi * y) / z;
         double radianSin = angleSin * (Math.PI / 180);
-        b = a / Math.Sin(radianSin);
+
+        if (Math.Sin(radianSin) == 0)
+        {
+            Console.WriteLine("Error");
+        }
+        else
+        {
+
+            b = a / Math.Sin(radianSin);
+        }
 
         a = Math.Round(a, 4);
         b = Math.Round(b, 4);
@@ -36,8 +55,7 @@ class Card
          * b = a/(sin((x+pi*y)/z)
          * ===perations end====
          * 
-         * output a = 0.04366, b = 0.871*/
-
+         * output a = 0.04366, b = 0.05*/
     }
 
 }
