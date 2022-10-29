@@ -20,7 +20,7 @@ class Card
 
         double angleSin = (x + pi * y) / z;
         double radianSin = angleSin * (Math.PI / 180);
-        b = Math.Sin(radianSin);
+        b = a / Math.Sin(radianSin);
 
         a = Math.Round(a, 4);
         b = Math.Round(b, 4);
