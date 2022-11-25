@@ -26,12 +26,13 @@ class ASD
          * значення нижньої половини матриці
          */
 
-
+        // ВВодимо розмір матриці
         Console.WriteLine("Введiть парну кiлькiсть рядкiв: ");
         int n = int.Parse(Console.ReadLine());
         Console.WriteLine("Введiть кiлькiсть стовпцiв: ");
         int m = int.Parse(Console.ReadLine());
 
+        // Перевірка на коректність данних
         while (n % 2 != 0 || n <= 0 || m <= 0)
         {
             Console.WriteLine("Помилка введення, спробуйте iнакше: ");
@@ -41,12 +42,14 @@ class ASD
             m = int.Parse(Console.ReadLine());
         }
 
+        // Вводимо діапазон випадкових чисел
         Console.WriteLine("Введiть дiапазон чисел, якими навмання \n буде заповнюватись матриця (рекомендовано 0-9):");
         Console.WriteLine("Мiнiмальне значення:");
         int min = int.Parse(Console.ReadLine());
         Console.WriteLine("Максимальне значення:");
         int max = int.Parse(Console.ReadLine());
 
+        // Перевірка на коректість введення діапазону
         while (min < 0 || max < 0 || min > max)
         {
             Console.WriteLine("Помилка введення, спробуйте iнакше: ");
@@ -57,11 +60,14 @@ class ASD
             max = int.Parse(Console.ReadLine());
         }
 
+        // Ствонюємо глобальні змінні - це комірки массиву або ж "координати" елементів
         int x = (n - 1);
         int y = 0;
 
+        // Створюємо двовимірний массив
         int[,] matrix = new int[n, m];
 
+        // Генеруємо псевдовипадкові числа, та виводиму матрицю у консоль
         Random randomNumber = new Random();
 
         for (int i = 0; i < n; i++)
@@ -79,16 +85,22 @@ class ASD
 
         Console.WriteLine("Шлях обходу нижньої половини: ");
 
+        // Створюємо глобальну змінну, яка буде змінюватись при кожному знайденому большому елементі
         int maxValue = 0;
 
+        // Цикл для робить обхід "зигзагом" у нижній половині та виводить шлях обходу
         Console.Write(matrix[x, 0] + " ");
         while (x != n / 2 || y != m - 1)
         {
+            // Ці перевірки (if) зробленні для надання поведінки руху обходу 
+
+            // Якщо ми у нижній частині пів-матриці
             if (x == n - 1)
             {
                 if (y != m - 1)
                 {
                     y++;
+                    // Перевірка на максимальний елемент, вона далі буде часто повторюватись
                     if (matrix[x, y] > maxValue)
                     {
                         maxValue = matrix[x, y];
@@ -97,6 +109,7 @@ class ASD
                 Console.Write(matrix[x, y] + " ");
                 while (y != 0 && x != n / 2)
                 {
+                    // Йдемо по діагоналі вверх-вліво поки не упремося
                     x--;
                     y--;
                     if (matrix[x, y] > maxValue)
@@ -106,6 +119,7 @@ class ASD
                     Console.Write(matrix[x, y] + " ");
                 }
             }
+            // Якщо ми з лівого краю пів-матриці
             if (y == 0)
             {
                 if (y == 0 && x == n / 2)
@@ -123,6 +137,7 @@ class ASD
                 Console.Write(matrix[x, y] + " ");
                 while (x != n - 1)
                 {
+                    // Йдемо по діагоналі вниз-праворуч поки не упремося
                     x++;
                     y++;
                     if (matrix[x, y] > maxValue)
@@ -136,6 +151,7 @@ class ASD
                     }
                 }
             }
+            // Якщо ми у верхній частині пів-матриці
             if (x == n / 2)
             {
                 if (y == m - 2)
@@ -156,6 +172,7 @@ class ASD
                 Console.Write(matrix[x, y] + " ");
                 while (x != n - 1)
                 {
+                    // Йдемо по діагоналі вниз-праворуч поки не упремося
                     x++;
                     y++;
                     if (matrix[x, y] > maxValue)
@@ -169,6 +186,7 @@ class ASD
                     }
                 }
             }
+            // Якщо у крайній правій частині пів-матриці
             if (y == m - 1)
             {
                 x--;
@@ -179,6 +197,7 @@ class ASD
                 Console.Write(matrix[x, y] + " ");
                 while (x != n / 2)
                 {
+                    // Йдемо по діагоналі вверх-вліво поки не упремося
                     x--;
                     y--;
                     if (matrix[x, y] > maxValue)
@@ -192,34 +211,14 @@ class ASD
                     }
                 }
             }
-            if (x == n / 2 && y == m - 3)
-            {
-                y++;
-                if (matrix[x, y] > maxValue)
-                {
-                    maxValue = matrix[x, y];
-                }
-                Console.Write(matrix[x, y] + " ");
-                x++;
-                y++;
-                if (matrix[x, y] > maxValue)
-                {
-                    maxValue = matrix[x, y];
-                }
-                Console.Write(matrix[x, y] + " ");
-                x--;
-                if (matrix[x, y] > maxValue)
-                {
-                    maxValue = matrix[x, y];
-                }
-                Console.Write(matrix[x, y] + " ");
-            }
         }
 
         Console.WriteLine("\n Найбiльше значення нижньої половини матрицi: " + maxValue);
 
         Console.WriteLine("\n");
         Console.WriteLine("Шлях обходу верхньої половини: ");
+
+        // Обхід верхньої частини матриці "змійкою" та виведення шляху обходу
 
         for (int i = (n / 2) - 1; i >= 0; i--)
         {
@@ -260,6 +259,8 @@ class ASD
         }
 
         Console.WriteLine("\n\nЗначення с верхньої половини, якi не перевищюють максимальне з нижньої: ");
+
+        // Той самий цикл, але тепер він тільки порівнює значення з максимальним
 
         for (int i = (n / 2) - 1; i >= 0; i--)
         {
@@ -315,3 +316,9 @@ class ASD
     }
 
 }
+// Деякі не зрозумілі перевірки (if) на перший погляд не зрозумілі, але вони потрібні для обхіду зигзагом
+// у випадку якщо висота нижньої півматриці парна або НЕпарна, звідти і деякі перевірки.
+// Це стосується і верхньої половини
+
+// Половина рядків коду загалом для красивого оформлення тому код громісткий,
+// Але вцілому функціональних у половину менше
