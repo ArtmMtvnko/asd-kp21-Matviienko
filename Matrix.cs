@@ -77,9 +77,9 @@ class ASD
         Console.WriteLine();
         Console.WriteLine();
 
-        Console.WriteLine(matrix[x, 0]);
+        Console.WriteLine("Шлях обходу нижньої половини: ");
 
-
+        Console.Write(matrix[x, 0] + " ");
         while (x != n / 2 && y != m - 1)
         {
             if (x == n - 1)
@@ -89,15 +89,11 @@ class ASD
                     y++;
                 }
                 Console.Write(matrix[x, y] + " ");
-                while (y != 0 || x != n / 2)
+                while (y != 0 && x != n / 2)
                 {
                     x--;
                     y--;
                     Console.Write(matrix[x, y] + " ");
-                    if (x == n / 2 || y == 0)
-                    {
-                        break;
-                    }
                 }
             }
             if (y == 0)
@@ -117,6 +113,12 @@ class ASD
             }
             if (x == n / 2)
             {
+                if (y == m - 2)
+                {
+                    y++;
+                    Console.Write(matrix[x, y] + " ");
+                    continue;
+                }
                 y++;
                 Console.Write(matrix[x, y] + " ");
                 while (x != n - 1)
@@ -154,6 +156,47 @@ class ASD
                 Console.Write(matrix[x, y] + " ");
                 x--;
                 Console.Write(matrix[x, y] + " ");
+            }
+        }
+
+        Console.WriteLine("\n");
+        Console.WriteLine("Шлях обходу верхньої половини: ");
+
+        for (int i = (n / 2) - 1; i >= 0; i--)
+        {
+            if ((n / 2 - 1) % 2 == 0)
+            {
+                if (i % 2 == 0)
+                {
+                    for (int j = m - 1; j >= 0; j--)
+                    {
+                        Console.Write(matrix[i, j] + " ");
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        Console.Write(matrix[i, j] + " ");
+                    }
+                }
+            }
+            else
+            {
+                if (i % 2 != 0)
+                {
+                    for (int j = m - 1; j >= 0; j--)
+                    {
+                        Console.Write(matrix[i, j] + " ");
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        Console.Write(matrix[i, j] + " ");
+                    }
+                }
             }
         }
 
