@@ -25,6 +25,97 @@ class ASD
          * 8) вивід значень верхньої половини матриці які менше за максимальне
          * значення нижньої половини матриці
          */
+
+
+        Console.WriteLine("Введiть парну кiлькiсть рядкiв: ");
+        int n = int.Parse(Console.ReadLine());
+        Console.WriteLine("Введiть кiлькiсть стовпцiв: ");
+        int m = int.Parse(Console.ReadLine());
+
+        int x = (n - 1);
+        int y = 0;
+
+        int[,] matrix = new int[n, m];
+
+        Random randomNumber = new Random();
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                matrix[i, j] = randomNumber.Next(0, 9);
+                Console.Write(matrix[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+        Console.WriteLine(matrix[x, 0]);
+
+
+        while (x != n / 2 && y != m - 1)
+        {
+            if (x == n - 1 && y <= (n / 2) - 1)
+            {
+                y++;
+                Console.Write(matrix[x, y] + " ");
+                while (y != 0)
+                {
+                    x--;
+                    y--;
+                    Console.Write(matrix[x, y] + " ");
+                }
+            }
+            if (y == 0)
+            {
+                x--;
+                Console.Write(matrix[x, y] + " ");
+                while (x != n - 1)
+                {
+                    x++;
+                    y++;
+                    Console.Write(matrix[x, y] + " ");
+                }
+            }
+            if (x == n - 1)
+            {
+                y++;
+                Console.Write(matrix[x, y] + " ");
+                while (x > n / 2)
+                {
+                    x--;
+                    y--;
+                    Console.Write(matrix[x, y] + " ");
+                }
+            }
+            if (x == n / 2)
+            {
+                y++;
+                Console.Write(matrix[x, y] + " ");
+                while (x != n - 1)
+                {
+                    x++;
+                    y++;
+                    Console.Write(matrix[x, y] + " ");
+                }
+            }
+
+            if (y == m - 1 && x != n - 1 && x != n / 2)
+            {
+                x--;
+                Console.Write(matrix[x, y] + " ");
+                while (x > n / 2)
+                {
+                    x--;
+                    y--;
+                    Console.Write(matrix[x, y] + " ");
+                }
+            }
+        }
+
+        Console.WriteLine("Finish");
     }
 
 }
