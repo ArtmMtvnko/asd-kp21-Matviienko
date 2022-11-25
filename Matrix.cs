@@ -68,7 +68,7 @@ class ASD
         {
             for (int j = 0; j < m; j++)
             {
-                matrix[i, j] = randomNumber.Next(min, max+1);
+                matrix[i, j] = randomNumber.Next(min, max + 1);
                 Console.Write(matrix[i, j] + " ");
             }
             Console.WriteLine();
@@ -79,31 +79,56 @@ class ASD
 
         Console.WriteLine("Шлях обходу нижньої половини: ");
 
+        int maxValue = 0;
+
         Console.Write(matrix[x, 0] + " ");
-        while (x != n / 2 && y != m - 1)
+        while (x != n / 2 || y != m - 1)
         {
             if (x == n - 1)
             {
                 if (y != m - 1)
                 {
                     y++;
+                    if (matrix[x, y] > maxValue)
+                    {
+                        maxValue = matrix[x, y];
+                    }
                 }
                 Console.Write(matrix[x, y] + " ");
                 while (y != 0 && x != n / 2)
                 {
                     x--;
                     y--;
+                    if (matrix[x, y] > maxValue)
+                    {
+                        maxValue = matrix[x, y];
+                    }
                     Console.Write(matrix[x, y] + " ");
                 }
             }
             if (y == 0)
             {
-                x--;
+                if (y == 0 && x == n / 2)
+                {
+                    y++;
+                }
+                else
+                {
+                    x--;
+                }
+                if (matrix[x, y] > maxValue)
+                {
+                    maxValue = matrix[x, y];
+                }
                 Console.Write(matrix[x, y] + " ");
                 while (x != n - 1)
                 {
                     x++;
                     y++;
+                    if (matrix[x, y] > maxValue)
+                    {
+                        maxValue = matrix[x, y];
+                    }
                     Console.Write(matrix[x, y] + " ");
                     if (x == n - 1 || y == m - 1)
                     {
@@ -116,15 +141,27 @@ class ASD
                 if (y == m - 2)
                 {
                     y++;
+                    if (matrix[x, y] > maxValue)
+                    {
+                        maxValue = matrix[x, y];
+                    }
                     Console.Write(matrix[x, y] + " ");
                     continue;
                 }
                 y++;
+                if (matrix[x, y] > maxValue)
+                {
+                    maxValue = matrix[x, y];
+                }
                 Console.Write(matrix[x, y] + " ");
                 while (x != n - 1)
                 {
                     x++;
                     y++;
+                    if (matrix[x, y] > maxValue)
+                    {
+                        maxValue = matrix[x, y];
+                    }
                     Console.Write(matrix[x, y] + " ");
                     if (x == n - 1 || y == m - 1)
                     {
@@ -135,11 +172,19 @@ class ASD
             if (y == m - 1)
             {
                 x--;
+                if (matrix[x, y] > maxValue)
+                {
+                    maxValue = matrix[x, y];
+                }
                 Console.Write(matrix[x, y] + " ");
                 while (x != n / 2)
                 {
                     x--;
                     y--;
+                    if (matrix[x, y] > maxValue)
+                    {
+                        maxValue = matrix[x, y];
+                    }
                     Console.Write(matrix[x, y] + " ");
                     if (x == n / 2)
                     {
@@ -150,14 +195,28 @@ class ASD
             if (x == n / 2 && y == m - 3)
             {
                 y++;
+                if (matrix[x, y] > maxValue)
+                {
+                    maxValue = matrix[x, y];
+                }
                 Console.Write(matrix[x, y] + " ");
                 x++;
                 y++;
+                if (matrix[x, y] > maxValue)
+                {
+                    maxValue = matrix[x, y];
+                }
                 Console.Write(matrix[x, y] + " ");
                 x--;
+                if (matrix[x, y] > maxValue)
+                {
+                    maxValue = matrix[x, y];
+                }
                 Console.Write(matrix[x, y] + " ");
             }
         }
+
+        Console.WriteLine("\n Найбiльше значення нижньої половини матрицi: " + maxValue);
 
         Console.WriteLine("\n");
         Console.WriteLine("Шлях обходу верхньої половини: ");
@@ -200,7 +259,59 @@ class ASD
             }
         }
 
-        Console.WriteLine("Finish");
+        Console.WriteLine("\n\nЗначення с верхньої половини, якi не перевищюють максимальне з нижньої: ");
+
+        for (int i = (n / 2) - 1; i >= 0; i--)
+        {
+            if ((n / 2 - 1) % 2 == 0)
+            {
+                if (i % 2 == 0)
+                {
+                    for (int j = m - 1; j >= 0; j--)
+                    {
+                        if (matrix[i, j] < maxValue)
+                        {
+                            Console.Write(matrix[i, j] + " ");
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        if (matrix[i, j] < maxValue)
+                        {
+                            Console.Write(matrix[i, j] + " ");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (i % 2 != 0)
+                {
+                    for (int j = m - 1; j >= 0; j--)
+                    {
+                        if (matrix[i, j] < maxValue)
+                        {
+                            Console.Write(matrix[i, j] + " ");
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        if (matrix[i, j] < maxValue)
+                        {
+                            Console.Write(matrix[i, j] + " ");
+                        }
+                    }
+                }
+            }
+        }
+
+        Console.WriteLine("\nFinish");
     }
 
 }
