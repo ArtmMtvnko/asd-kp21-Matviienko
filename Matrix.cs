@@ -32,6 +32,31 @@ class ASD
         Console.WriteLine("Введiть кiлькiсть стовпцiв: ");
         int m = int.Parse(Console.ReadLine());
 
+        while (n % 2 != 0 || n <= 0 || m <= 0)
+        {
+            Console.WriteLine("Помилка введення, спробуйте iнакше: ");
+            Console.WriteLine("Введiть парну кiлькiсть рядкiв: ");
+            n = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введiть кiлькiсть стовпцiв: ");
+            m = int.Parse(Console.ReadLine());
+        }
+
+        Console.WriteLine("Введiть дiапазон чисел, якими навмання \n буде заповнюватись матриця (рекомендовано 0-9):");
+        Console.WriteLine("Мiнiмальне значення:");
+        int min = int.Parse(Console.ReadLine());
+        Console.WriteLine("Максимальне значення:");
+        int max = int.Parse(Console.ReadLine());
+
+        while (min < 0 || max < 0 || min > max)
+        {
+            Console.WriteLine("Помилка введення, спробуйте iнакше: ");
+            Console.WriteLine("Введiть дiапазон чисел, якими навмання \n буде заповнюватись матриця (рекомендовано 0-9):");
+            Console.WriteLine("Мiнiмальне значення:");
+            min = int.Parse(Console.ReadLine());
+            Console.WriteLine("Максимальне значення:");
+            max = int.Parse(Console.ReadLine());
+        }
+
         int x = (n - 1);
         int y = 0;
 
@@ -43,7 +68,7 @@ class ASD
         {
             for (int j = 0; j < m; j++)
             {
-                matrix[i, j] = randomNumber.Next(0, 9);
+                matrix[i, j] = randomNumber.Next(min, max+1);
                 Console.Write(matrix[i, j] + " ");
             }
             Console.WriteLine();
